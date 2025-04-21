@@ -1,18 +1,27 @@
-import { Dialog, DialogContent, Typography } from "@mui/material";
+import { Dialog, DialogContent, DialogTitle } from "@mui/material";
+import Question1 from "./questions/Question1";
 
-function QuestionDialog(props: {
+function QuestionDialog({
+  open,
+  questionNumber,
+  handleCorrectAnswer,
+  handleClose,
+}: {
   open: boolean;
   questionNumber: number;
+  handleCorrectAnswer: () => void;
   handleClose: () => void;
 }) {
-  const { open, questionNumber, handleClose } = props;
-  return (<Dialog open={open} onClose={handleClose}>
-    <DialogContent>
-      <Typography variant="h6" gutterBottom>
-        This is a dialog box with question {questionNumber} in it.
-      </Typography>
-    </DialogContent>
-  </Dialog>)
+  return (
+    <Dialog open={open} onClose={handleClose}>
+      <DialogTitle>Vraag {questionNumber} </DialogTitle>
+      <DialogContent>
+        {questionNumber === 1 && <Question1 handleCorrectAnswer={handleCorrectAnswer}/>}
+      </DialogContent>
+    </Dialog>
+  );
 }
 
 export default QuestionDialog;
+
+

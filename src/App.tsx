@@ -26,6 +26,7 @@ function App() {
 
       if (graphicResults.length > 0) {
         const id = graphicResults[0].graphic.attributes?.id;
+        if (!id) return;
         setQuestionNumber(id);
         setDialogOpen(true);
       }
@@ -46,7 +47,7 @@ function App() {
 
   return (
     <Box sx={{ height: "100vh", width: "100vw" }}>
-      <QuestionDialog open={dialogOpen} questionNumber={questionNumber} handleClose={handleCorrectAnswer} />
+      <QuestionDialog open={dialogOpen} questionNumber={questionNumber} handleCorrectAnswer={handleCorrectAnswer} handleClose={handleCorrectAnswer} />
       <arcgis-map
         itemId="beccdc887c2641a69b21e0652a0a801d"
         onarcgisViewReadyChange={(event) => {

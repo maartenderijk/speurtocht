@@ -13,7 +13,7 @@ function Question1({ handleCorrectAnswer }: QuestionProps) {
   };
 
   const handleSubmit = () => {
-    if (selectedOption === "Red") {
+    if (selectedOption === "Ajax") {
       handleCorrectAnswer()
     }
   };
@@ -21,13 +21,13 @@ function Question1({ handleCorrectAnswer }: QuestionProps) {
   return (
     <Stack spacing={2} >
       <Typography variant="h6" gutterBottom>
-        What is your favorite color?
+        Wat is de beste voetbalclub van Nederland
       </Typography>
       <FormControl component="fieldset">
         <RadioGroup value={selectedOption} onChange={handleOptionChange}>
-          <FormControlLabel value="Red" control={<Radio />} label="Red" />
-          <FormControlLabel value="Blue" control={<Radio />} label="Blue" />
-          <FormControlLabel value="Green" control={<Radio />} label="Green" />
+          <FormControlLabel value="Ajax" control={<Radio />} label="Ajax" />
+          <FormControlLabel value="PSV" control={<Radio />} label="PSV" />
+          <FormControlLabel value="Feyenoord" control={<Radio />} label="Feyenoord" />
         </RadioGroup>
       </FormControl>
       <Button
@@ -36,7 +36,7 @@ function Question1({ handleCorrectAnswer }: QuestionProps) {
         onClick={handleSubmit}
         disabled={!selectedOption}
       >
-        Submit
+        Ok
       </Button>
     </Stack>
   );

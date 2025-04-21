@@ -11,7 +11,8 @@ import QuestionDialog from "./QuestionDialog";
 function App() {
   const mapViewRef = useRef<MapView>(null);
   const layerRef = useRef<GeoJSONLayer>(null);
-  const [questionNumber, setQuestionNumber] = useState(1);
+  const [questionNumber, setQuestionNumber] = useState(0);
+  const [completedQuestions, setCompletedQuestions] = useState<number[]>([0]);
   const [dialogOpen, setDialogOpen] = useState(false);
 
 
@@ -34,11 +35,12 @@ function App() {
   };
 
   const handleCorrectAnswer = () => {
-    const updatedItemId = questionNumber + 1;
-    if (mapViewRef.current) {
-      updateGeoJSONlayer(mapViewRef.current, updatedItemId);
+
+    if (mapViewRef.current && !completedQuestions.includes(questionNumber)) {
+      const completedQuestionsCount = completedQuestions.length + 1;
+      updateGeoJSONlayer(mapViewRef.current, completedQuestionsCount);
       setDialogOpen(false);
-      setQuestionNumber(updatedItemId);
+      setCompletedQuestions((prev) => [...prev, questionNumber]);
     }
     setDialogOpen(false);
   }
@@ -47,7 +49,7 @@ function App() {
 
   return (
     <Box sx={{ height: "100vh", width: "100vw" }}>
-      <QuestionDialog open={dialogOpen} questionNumber={questionNumber} handleCorrectAnswer={handleCorrectAnswer} handleClose={handleCorrectAnswer} />
+      <QuestionDialog open={dialogOpen} questionNumber={questionNumber} handleCorrectAnswer={handleCorrectAnswer} handleClose={() => setDialogOpen(false)} />
       <arcgis-map
         itemId="beccdc887c2641a69b21e0652a0a801d"
         onarcgisViewReadyChange={(event) => {

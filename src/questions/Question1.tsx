@@ -1,18 +1,18 @@
 import { Typography, Radio, RadioGroup, FormControlLabel, FormControl, Button, Stack } from "@mui/material";
 import { useState } from "react";
 
-interface Question1Props {
+export interface QuestionProps {
   handleCorrectAnswer: () => void;
 }
 
-function Question1({ handleCorrectAnswer }: Question1Props) {
+function Question1({ handleCorrectAnswer }: QuestionProps) {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handleOptionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedOption(event.target.value);
   };
 
-  const handleButtonClick = () => {
+  const handleSubmit = () => {
     if (selectedOption === "Red") {
       handleCorrectAnswer()
     }
@@ -33,9 +33,8 @@ function Question1({ handleCorrectAnswer }: Question1Props) {
       <Button
         variant="contained"
         color="primary"
-        onClick={handleButtonClick}
-        sx={{ marginTop: 2 }}
-        disabled={!selectedOption} // Disable button if no option is selected
+        onClick={handleSubmit}
+        disabled={!selectedOption}
       >
         Submit
       </Button>

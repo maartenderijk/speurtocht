@@ -28,7 +28,7 @@ const demoLocatiesGent = [
     type: "Feature",
     geometry: {
       type: "Point",
-      coordinates: [3.720634, 51.056146], // Coordinates for Korenmarkt
+      coordinates: [3.721909, 51.054656],
     },
     properties: {
       name: "Korenmarkt",
@@ -39,7 +39,7 @@ const demoLocatiesGent = [
     type: "Feature",
     geometry: {
       type: "Point",
-      coordinates: [3.722556, 51.057441], // Coordinates for Graslei
+      coordinates: [3.722556, 51.057441],
     },
     properties: {
       name: "Graslei",
@@ -50,7 +50,7 @@ const demoLocatiesGent = [
     type: "Feature",
     geometry: {
       type: "Point",
-      coordinates: [3.726384, 51.054788], // Coordinates for Belfry of Ghent
+      coordinates: [3.726384, 51.054788],
     },
     properties: {
       name: "Belfry of Ghent",

@@ -1,59 +1,65 @@
-import "@arcgis/map-components/dist/components/arcgis-map";
+import "@arcgis/map-components/components/arcgis-map";
 import "@arcgis/map-components/components/arcgis-locate";
-import { Box, Button, Dialog, DialogContent, Typography } from "@mui/material";
+import { Box, } from "@mui/material";
 
-import { loadGeoJSONLayer, updateMapView } from "./loadLayer";
+import { loadGeoJSONLayer, updateGeoJSONlayer } from "./layer";
 import { useRef, useState } from "react";
 import MapView from "@arcgis/core/views/MapView";
+import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer";
+import QuestionDialog from "./QuestionDialog";
 
 function App() {
   const mapViewRef = useRef<MapView>(null);
+  const layerRef = useRef<GeoJSONLayer>(null);
   const [questionNumber, setQuestionNumber] = useState(1);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
-  const handleAddFeature = () => {
-    const updatedItemId = questionNumber + 1;
-    if (mapViewRef.current) {
-      updateMapView(mapViewRef.current, updatedItemId);
-      setQuestionNumber(updatedItemId);
+
+  const handleMapClick = async (event: __esri.ViewClickEvent) => {
+    if (!mapViewRef.current || !layerRef.current) return;
+
+    const view = mapViewRef.current;
+    const response = await view.hitTest(event);
+
+    if (response.results.length > 0) {
+      const graphicResults = response.results.filter(results => results.type === 'graphic');
+
+      if (graphicResults.length > 0) {
+        const id = graphicResults[0].graphic.attributes?.id;
+        setQuestionNumber(id);
+        setDialogOpen(true);
+      }
     }
   };
+
+  const handleCorrectAnswer = () => {
+    const updatedItemId = questionNumber + 1;
+    if (mapViewRef.current) {
+      updateGeoJSONlayer(mapViewRef.current, updatedItemId);
+      setDialogOpen(false);
+      setQuestionNumber(updatedItemId);
+    }
+    setDialogOpen(false);
+  }
+
 
 
   return (
     <Box sx={{ height: "100vh", width: "100vw" }}>
-      <Dialog
-        open={false}>
-        <DialogContent>
-          <Typography variant="h6" gutterBottom>
-            This is a dialog box with an ArcGIS map component inside it.
-          </Typography>
-        </DialogContent>
-      </Dialog>
+      <QuestionDialog open={dialogOpen} questionNumber={questionNumber} handleClose={handleCorrectAnswer} />
       <arcgis-map
         itemId="beccdc887c2641a69b21e0652a0a801d"
         onarcgisViewReadyChange={(event) => {
-          const view = event.target.view
+          const view = event.target.view;
           mapViewRef.current = view;
-          loadGeoJSONLayer(view);
+          layerRef.current = loadGeoJSONLayer(view);
+          view.on("click", handleMapClick);
         }}
       >
         <arcgis-locate position="top-right" />
       </arcgis-map>
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={handleAddFeature}
-        sx={{
-          position: "absolute",
-          top: "10px",
-          left: "10px",
-          zIndex: 1000,
-        }}
-      >
-        Add Location
-      </Button>
     </Box>
   );
 }
 
-export default App
+export default App;

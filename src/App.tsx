@@ -2,6 +2,8 @@ import "@arcgis/map-components/dist/components/arcgis-map";
 import "@arcgis/map-components/components/arcgis-locate";
 import { Box, Dialog, DialogContent, Typography } from "@mui/material";
 
+import { loadGeoJSONLayer } from "./loadLayer";
+
 function App() {
   return (
     <Box sx={{ height: "100vh", width: "100vw" }}>
@@ -14,7 +16,11 @@ function App() {
         </DialogContent>
       </Dialog>
       <arcgis-map
-        itemId="d5dda743788a4b0688fe48f43ae7beb9"
+        itemId="beccdc887c2641a69b21e0652a0a801d"
+        onarcgisViewReadyChange={(event) => {
+          const view = event.target.view
+          loadGeoJSONLayer(view);
+        }}
       >
         <arcgis-locate />
       </arcgis-map>

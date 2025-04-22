@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && echo. > docs\\.jekyll",
     "lint": "eslint .",
     "preview": "vite preview"
   },

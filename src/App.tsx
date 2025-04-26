@@ -1,12 +1,15 @@
 import "@arcgis/map-components/components/arcgis-map";
 import "@arcgis/map-components/components/arcgis-locate";
-import { Box, } from "@mui/material";
+import { Box, ButtonGroup, IconButton } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
+import RestartAltIcon from '@mui/icons-material/RestartAlt';
 
 import { loadGeoJSONLayer, updateGeoJSONlayer } from "./layer";
 import { useRef, useState } from "react";
 import MapView from "@arcgis/core/views/MapView";
 import GeoJSONLayer from "@arcgis/core/layers/GeoJSONLayer";
 import QuestionDialog from "./QuestionDialog";
+
 
 function App() {
   const mapViewRef = useRef<MapView>(null);
@@ -48,9 +51,24 @@ function App() {
 
 
   return (
-    <Box sx={{ height: "100vh", width: "100vw" }}>
+    <Box sx={{ height: "100vh", width: "100vw", position: 'relative' }}>
       <QuestionDialog open={dialogOpen} questionNumber={questionNumber} handleCorrectAnswer={handleCorrectAnswer} handleClose={() => setDialogOpen(false)} />
-      <arcgis-map
+      <Box sx={{ position: 'absolute', top: 16, left: 16, zIndex: 1000 }}>
+        <ButtonGroup variant="contained" aria-label="outlined primary button group">
+          <IconButton onClick={() => {
+            setQuestionNumber(1);
+            setCompletedQuestions([0])
+          }} aria-label="reset">
+            <RestartAltIcon />
+          </IconButton>
+          <IconButton onClick={() => {
+            setQuestionNumber((prev) => prev + 1);
+            handleCorrectAnswer()
+          }} aria-label="add">
+            <AddIcon />
+          </IconButton>
+        </ButtonGroup>
+      </Box> <arcgis-map
         itemId="beccdc887c2641a69b21e0652a0a801d"
         onarcgisViewReadyChange={(event) => {
           const view = event.target.view;

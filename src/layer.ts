@@ -26,7 +26,7 @@ const createGeoJSONLayer = (itemId: number) => {
       symbol: {
         type: "simple-marker",
         color: "blue",
-        size: "8px",
+        size: "16px",
         outline: {
           color: "white",
           width: 1,

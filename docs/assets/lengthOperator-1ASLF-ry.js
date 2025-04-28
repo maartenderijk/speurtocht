@@ -1,1 +1,0 @@
-import{eJ as a}from"./index-CZ5hE8fp.js";import{fromGeometryToGXGeometry as c,getSpatialReference as i}from"./jsonConverter-C0KAyFpw.js";import"./ProjectionTransformation-C0DPS25h.js";import"./SimpleGeometryCursor-B92kdZ15.js";function u(t,m={}){const{unit:o}=m;let e=c(t).calculateLength2D();const r=i(t);return e&&o&&r&&(e=a(e,r,o)),e}export{u as execute};

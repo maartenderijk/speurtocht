@@ -53,22 +53,6 @@ function App() {
   return (
     <Box sx={{ height: "100vh", width: "100vw", position: 'relative' }}>
       <QuestionDialog open={dialogOpen} questionNumber={questionNumber} handleCorrectAnswer={handleCorrectAnswer} handleClose={() => setDialogOpen(false)} />
-      <Box sx={{ position: 'absolute', top: 16, left: 16, zIndex: 1000 }}>
-        <ButtonGroup variant="contained" aria-label="outlined primary button group">
-          <IconButton onClick={() => {
-            setQuestionNumber(1);
-            setCompletedQuestions([0])
-          }} aria-label="reset">
-            <RestartAltIcon />
-          </IconButton>
-          <IconButton onClick={() => {
-            setQuestionNumber((prev) => prev + 1);
-            handleCorrectAnswer()
-          }} aria-label="add">
-            <AddIcon />
-          </IconButton>
-        </ButtonGroup>
-      </Box>
       <arcgis-map
         itemId="beccdc887c2641a69b21e0652a0a801d"
         onarcgisViewReadyChange={(event) => {

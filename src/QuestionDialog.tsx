@@ -1,6 +1,5 @@
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
-import Question1 from "./questions/Question1";
-import Question2 from "./questions/Question2";
+import QuestionComponent from "./questions/QuestionComponent";
 
 function QuestionDialog({
   open,
@@ -17,8 +16,8 @@ function QuestionDialog({
     <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
       <DialogTitle>Vraag {questionNumber} </DialogTitle>
       <DialogContent>
-        {questionNumber === 1 && <Question1 handleCorrectAnswer={handleCorrectAnswer} />}
-        {questionNumber === 2 && <Question2 handleCorrectAnswer={handleCorrectAnswer} />}
+        <QuestionComponent questionNumber={questionNumber} handleCorrectAnswer={handleCorrectAnswer} />
+
       </DialogContent>
     </Dialog>
   );

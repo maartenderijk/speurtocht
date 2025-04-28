@@ -25,7 +25,7 @@ const createGeoJSONLayer = (itemId: number) => {
       type: "simple",
       symbol: {
         type: "simple-marker",
-        color: "blue",
+        color: "red",
         size: "16px",
         outline: {
           color: "white",
@@ -33,6 +33,25 @@ const createGeoJSONLayer = (itemId: number) => {
         },
       },
     },
+    labelingInfo: [
+      {
+        symbol: {
+          type: "text",
+          color: "black",
+          haloColor: "white",
+          haloSize: "1px",
+          font: {
+            size: 12,
+            family: "Arial",
+            weight: "bold",
+          },
+        },
+        labelPlacement: "above-center",
+        labelExpressionInfo: {
+          expression: "$feature.id",
+        },
+      },
+    ],
     outFields: ["*"],
   });
   return geoJSONLayer;
@@ -44,4 +63,3 @@ export const updateGeoJSONlayer = (mapView: MapView, itemId: number) => {
   mapView.map.add(geoJSONLayer);
   return geoJSONLayer;
 };
-

@@ -68,7 +68,8 @@ function App() {
             <AddIcon />
           </IconButton>
         </ButtonGroup>
-      </Box> <arcgis-map
+      </Box>
+      <arcgis-map
         itemId="beccdc887c2641a69b21e0652a0a801d"
         onarcgisViewReadyChange={(event) => {
           const view = event.target.view;
@@ -77,7 +78,13 @@ function App() {
           view.on("click", handleMapClick);
         }}
       >
-        <arcgis-locate position="top-right" />
+        <arcgis-locate
+          position="top-right"
+          geolocationOptions={{
+            maximumAge: 0,
+            timeout: 15000,
+            enableHighAccuracy: true
+          }} />
       </arcgis-map>
     </Box>
   );

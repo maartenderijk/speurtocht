@@ -29,7 +29,7 @@ function QuestionComponent({ questionNumber, handleCorrectAnswer }: QuestionProp
 
   const question = questionDefinition.find((q) => q.questionNumber === questionNumber);
   if (!question) return null;
-  const { questions } = question ;
+  const { questions } = question;
 
   const steps = ['Locatie', 'Mark']
 
@@ -40,7 +40,7 @@ function QuestionComponent({ questionNumber, handleCorrectAnswer }: QuestionProp
     const currentQuestion = question.questions[activeStep];
     const isCorrect =
       currentQuestion.type === "text"
-        ? answer === currentQuestion.correctAnswer
+        ? answer.toLowerCase().trim().includes(currentQuestion.correctAnswer.toLowerCase().trim())
         : selectedOption === currentQuestion.correctAnswer;
 
     if (isCorrect) {
@@ -91,6 +91,13 @@ function QuestionComponent({ questionNumber, handleCorrectAnswer }: QuestionProp
           <Typography variant="h6" gutterBottom>
             {questions[activeStep].question}
           </Typography>
+          {questions[activeStep].imagePath && (
+            <img
+              src={questions[activeStep].imagePath}
+              alt="Question"
+              style={{ width: "100%", maxHeight: "300px", objectFit: "cover", marginBottom: "16px" }}
+            />
+          )}
           {questions[activeStep].type === "text" ? (
             <TextField
               label="Antwoord"

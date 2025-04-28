@@ -3,6 +3,7 @@ export interface Question {
   question: string;
   correctAnswer: string;
   options?: string[];
+  imagePath?: string;
 }
 
 interface QuestionDefinition {
@@ -20,10 +21,9 @@ export const questionDefinition: QuestionDefinition[] = [
         correctAnswer: "1",
       },
       {
-        type: "radio",
-        question: "Op welk nummer ligt het bisschopshuis?",
-        correctAnswer: "1",
-        options: ["1", "2", "3"],
+        type: "text",
+        question: "Welk merk scooter had Mark?",
+        correctAnswer: "Italjet",
       },
     ],
   },
@@ -31,10 +31,15 @@ export const questionDefinition: QuestionDefinition[] = [
     questionNumber: 2,
     questions: [
       {
-        type: "radio",
-        question: "Wat is de naam van deze straat?",
-        correctAnswer: "Veldstraat",
-        options: ["Veldstraat", "Sint Michielsbrug", "Schouwburgstraat"],
+        type: "text",
+        question: "Welk beest staat er bovenop deze toren?",
+        correctAnswer: "Draak",
+        imagePath: "/speurtocht/images/q2.jpg",
+      },
+      {
+        type: "text",
+        question: "In welk straatmeubilair in Madrid heeft Mark geurineerd?",
+        correctAnswer: "prullenbak",
       },
     ],
   },

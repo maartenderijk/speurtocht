@@ -1,5 +1,6 @@
 import "@arcgis/map-components/components/arcgis-map";
 import "@arcgis/map-components/components/arcgis-locate";
+import "@arcgis/map-components/components/arcgis-track";
 import { Box } from "@mui/material";
 
 import { loadGeoJSONLayer, updateGeoJSONlayer } from "./layer";
@@ -60,7 +61,7 @@ function App() {
           view.on("click", handleMapClick);
         }}
       >
-        <arcgis-locate
+        <arcgis-track
           position="top-right"
           geolocationOptions={{
             maximumAge: 0,

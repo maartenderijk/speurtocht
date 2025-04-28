@@ -1,8 +1,6 @@
 import "@arcgis/map-components/components/arcgis-map";
 import "@arcgis/map-components/components/arcgis-locate";
-import { Box, ButtonGroup, IconButton } from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import { Box } from "@mui/material";
 
 import { loadGeoJSONLayer, updateGeoJSONlayer } from "./layer";
 import { useRef, useState } from "react";
